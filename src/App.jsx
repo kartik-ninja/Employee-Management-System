@@ -5,6 +5,7 @@ import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
+  // localStorage.clear();
   const [user, setUser] = useState(null);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const authData = useContext(AuthContext);
@@ -32,6 +33,7 @@ const App = () => {
     );
     if (adminUser) {
       setUser("admin");
+      setLoggedInUserData(adminUser);
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
       return;
     }
@@ -58,7 +60,10 @@ const App = () => {
     <div>
       {!user && <Login handleLogin={handleLogin}></Login>}
       {user === "admin" && (
-        <AdminDashboard changeUser={setUser}></AdminDashboard>
+        <AdminDashboard
+          changeUser={setUser}
+          data={loggedInUserData}
+        ></AdminDashboard>
       )}
       {user === "employee" && (
         <EmployeeDashboard

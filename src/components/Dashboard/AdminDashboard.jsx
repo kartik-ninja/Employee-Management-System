@@ -5,7 +5,7 @@ import Header from "../other/Header";
 const AdminDashboard = (props) => {
   return (
     <div className="h-screen w-full p-10">
-      <Header changeUser={props.changeUser}></Header>
+      <Header changeUser={props.changeUser} data={props.data}></Header>
       <CreateTask></CreateTask>
       <AllTask></AllTask>
     </div>
